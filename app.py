@@ -186,22 +186,36 @@ def generate_referral_message(person_name, job_title, company_name, job_link, mo
 Write a casual, friendly LinkedIn message to {person_name} asking for a referral for {job_context}.
 
 CRITICAL REQUIREMENTS:
-- Start with: "Hi {person_name},"
-- When mentioning the job, use natural phrasing like: "{job_mention}"
-- If the job mention is generic (like "this role at your organization"), use phrases like:
+
+**Tone & Style:**
+- Very casual, like texting a colleague
+- Natural, conversational language
+- Skip generic greetings like "Hope you're doing well" or "Hope this finds you well"
+- Start directly: "Hi {person_name},"
+- Sound human and authentic, not corporate
+
+**Content:**
+- Briefly mention you're exploring AI/ML opportunities
+- When referencing the job, use natural phrases like:
   * "this role at your organization" 
-  * "this opportunity fits my background"
-  * "the position I'm interested in"
-- DO NOT invent, assume, or add ANY job title or company name beyond what's provided
-- Mention that you're exploring AI/ML roles
-- Include the job link naturally in the message: {job_link}
-- Mention that you've attached/shared your resume
-- Politely ask for insights or referral
-- Keep it casual, friendly, and human-sounding
-- Be concise (4-6 sentences max)
-- NO emojis, NO hashtags, NO markdown formatting
-- Sound natural, not robotic or overly formal
-- Don't use phrases like "I hope this message finds you well"
+  * "this opportunity"
+  * "the position"
+- Reference the link naturally: "Here's the link: {job_link}"
+- Mention you've shared/attached your resume
+- Ask if they'd be open to providing insights or a referral
+- Keep it short: 3-4 sentences max
+
+**Formatting:**
+- Use line breaks between ideas for readability
+- Don't make it one giant paragraph
+- Natural paragraph breaks after 1-2 sentences
+
+**Avoid:**
+- DO NOT invent job titles or company names
+- NO emojis, NO hashtags
+- NO overly formal language
+- NO generic pleasantries
+- NO robotic corporate speak
 
 Generate ONLY the message text, nothing else."""
 
