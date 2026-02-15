@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import re
 from dotenv import load_dotenv
-import pyperclip
 
 # Load environment variables from .env file
 load_dotenv()
@@ -290,18 +289,29 @@ def main():
             "Generated Message",
             value=st.session_state['generated_message'],
             height=250,
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            key="message_output"
         )
         
-        # Copy to clipboard button
+        # Copy to clipboard button with JavaScript
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
-            if st.button("📋 Copy to Clipboard", use_container_width=True):
-                try:
-                    pyperclip.copy(message_text)
-                    st.success("✅ Message copied to clipboard!")
-                except Exception as e:
-                    st.warning("⚠️ Could not copy automatically. Please select and copy manually (Ctrl+C)")
+            if st.button("📋 Copy to Clipboard", use_container_width=True, key="copy_btn"):
+                # Use JavaScript to copy text
+                st.components.v1.html(
+                    f"""
+                    <script>
+                    const text = {repr(message_text)};
+                    navigator.clipboard.writeText(text).then(function() {{
+                        console.log('Copied to clipboard successfully!');
+                    }}, function(err) {{
+                        console.error('Could not copy text: ', err);
+                    }});
+                    </script>
+                    """,
+                    height=0,
+                )
+                st.success("✅ Message copied to clipboard!")
         
         st.info("💡 **Tip:** You can edit the message above before copying if needed!")
 
