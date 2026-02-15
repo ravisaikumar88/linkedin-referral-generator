@@ -254,30 +254,21 @@ def main():
             st.error("❌ Please enter a valid URL (must start with http:// or https://)")
             return
         
-        # Show progress
-        with st.spinner("🔍 Scraping job details..."):
-            job_title, company_name = scrape_job_details(job_link)
+        # Scrape job details silently (don't display)
+        job_title, company_name = scrape_job_details(job_link)
         
-        # Display scraped info
-        if job_title or company_name:
-            st.success("✅ Job details extracted successfully!")
-            info_cols = st.columns(2)
-            with info_cols[0]:
-                if job_title:
-                    st.info(f"**Job Title:** {job_title}")
-            with info_cols[1]:
-                if company_name:
-                    st.info(f"**Company:** {company_name}")
-        else:
-            st.warning("⚠️ Could not extract job details. The message will use generic wording.")
+        # Always use generic wording since we include the link
+        # This avoids showing potentially incorrect scraped data
+        final_job_title = None
+        final_company_name = None
         
         # Generate message
         with st.spinner("✨ Generating your message..."):
             try:
                 message = generate_referral_message(
                     person_name.strip(),
-                    job_title,
-                    company_name,
+                    final_job_title,  # Always None = generic wording
+                    final_company_name,  # Always None = generic wording
                     job_link.strip(),
                     model
                 )
